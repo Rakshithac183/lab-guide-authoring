@@ -133,7 +133,6 @@ Example:
 5. If RDP over HTTPS with Jump VM is provided, the lab guide should be written with RDP over HTTPs experience. If the lab can be performed from the browser, do not perform the lab from within your local browser and prepare the documentation as the experience might vary in the two scenarios.
  
  
- 
 ## Samples
 
 Here are few samples to help you understand better
@@ -148,7 +147,7 @@ More Samples: https://github.com/CloudLabsAI-Azure
 
 ## Injecting Personalized Information into Guide 
 
-Using **inject key** property, you can insert custom information in Lab Guide itself, such as Azure Username and password.
+Using **inject key** property, you can insert dynamic information in Lab Guide itself, such as Azure Username and password.
 
 Below are the natively supported inject keys:
 ```
@@ -157,35 +156,37 @@ Below are the natively supported inject keys:
 <inject key="DeploymentID" />
 ```
 ```
-You can close inject key in two ways:
+You can close inject key code snippet in two ways:
 i) <inject key="AzureAdUserEmail"></inject> 
 ii) <inject key="AzureAdUserEmail"/>
 
 Inject key also supports additional parameters:
-i) color: Using color parameter, we can add color to injected value.
+i) color: Using color parameter, you can add color to injected value.
 ex: 
    <inject key="AzureAdUserEmail" style="color:red" />
 
-Other supported colors are indianRed, blue, lightCoral.
+Other supported colors are indianRed, blue, lightCoral, green.
 
-ii) enableCopy: Setting the enableCopy parameter to "true" will provide us a copy icon next to the injected text from which we can copy the value. In contast, setting it to "false" will disable the copy icon.
+ii) enableCopy: Setting the enableCopy parameter to "true" will provide you a copy icon next to the injected text from which you can copy the value. In contrast, setting it to "false" will disable the copy icon.
 ex:
    <inject key="AzureAdUserEmail" enableCopy="true" /> 
 ```
 
 
-### Test Guide 
+### Sample Guide 
 ```
 1. On Sign in to Microsoft Azure blade, you will see a login screen, in that enter the following email/username. 
-   Email/Username: <inject key="AzureAdUserEmail" enableCopy="true"></inject>
+   Email/Username: <inject key="AzureAdUserEmail" enableCopy="true" style="color:blue"></inject>
 
 2. Now enter the following password and click on Sign in.
-   Password: <inject key="AzureAdUserPassword" enableCopy="true"></inject>
+   Password: <inject key="AzureAdUserPassword" enableCopy="true" style="color:blue"></inject>
 ```
 
-### Insert environment outputs:
+![](/img/LabDeveloper/LabGuide/injected-labguide.png)
 
-Additionally, you can inject the values from ARM template outputs such as any azure resources name, VM username/password, etc. can be injected to lab guide.
+### Inject environment outputs:
+
+Additionally, you can inject the values from ARM template outputs such as azure resource names, VM username/password, etc. to the lab guide.
 
 **>Example**: 
 
@@ -211,17 +212,18 @@ Below is the Outputs section of ARM template:
   }
 ```
 
-### Test Guide 
+### Sample Guide 
 ```
-1. Once logged into Microsoft Azure homescreen, you will see a VM icon, select it and then select the VM <inject key="VM Name"/>.
+1. Once logged into Microsoft Azure portal, search and select Virtual Machine resource. In the VM list, select the VM <inject key="VM Name"/>.
 
-2. Download the RDP file and open it so that you can connect to it.
+2. Download the RDP file and open it so that you can connect to the VM.
 
-3. In the Remote Desktop Connection program, provide the VM DNS name <inject key="VM DNS Name" enableCopy="true"/> and click Connect.
+3. In the Remote Desktop Connection, provide the VM DNS name <inject key="VM DNS Name" enableCopy="true"/> and click Connect.
 
-4. In the following Enter Your Credential screen, provide VM username <inject key="VM Admin Username" enableCopy="true" style="color:blue" /> and password <inject key="VM Admin Password" enableCopy="true" style="color:blue" /> and select OK followed by Yes in the next page, which will then log you into the VM.
+4. In the following "Enter Your Credential" screen, provide VM username <inject key="VM Admin Username" enableCopy="true" style="color:blue" /> and password <inject key="VM Admin Password" enableCopy="true" style="color:blue" /> and select OK followed by Yes in the next page, which will then log you into the VM.
 
 ```
+After rendering of the above Sample Guide, the users will see the actual values from the ARM template outputs.
 
 ## Github Master Document:
 
