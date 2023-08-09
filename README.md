@@ -1,3 +1,7 @@
+---
+sidebar_position: 6
+slug: /LabDeveloper/AuthoringLabGuides
+---
 
 # Authoring Lab Guides
 
@@ -144,46 +148,44 @@ More Samples: https://github.com/CloudLabsAI-Azure
 
 ## Injecting Personalized Information into Guide 
 
-Using **inject key** property, you can insert custom information in Lab Guide Itself, such as Azure Username and password.
+Using **inject key** property, you can insert custom information in Lab Guide itself, such as Azure Username and password.
+
+Below are the natively supported inject keys:
 ```
 <inject key="AzureAdUserEmail"></inject>
 <inject key="AzureAdUserPassword"></inject>
+<inject key="DeploymentID" />
 ```
+```
+You can close inject key in two ways:
+i) <inject key="AzureAdUserEmail"></inject> 
+ii) <inject key="AzureAdUserEmail"/>
+
+Inject key also supports additional parameters:
+i) color: Using color parameter, we can add color to injected value.
+ex: 
+   <inject key="AzureAdUserEmail" style="color:red" />
+
+Other supported colors are indianRed, blue, lightCoral.
+
+ii) enableCopy: Setting the enableCopy parameter to "true" will provide us a copy icon next to the injected text from which we can copy the value. In contast, setting it to "false" will disable the copy icon.
+ex:
+   <inject key="AzureAdUserEmail" enableCopy="true" /> 
+```
+
+
 ### Test Guide 
 ```
 1. On Sign in to Microsoft Azure blade, you will see a login screen, in that enter the following email/username. 
-   Email/Username: <inject key="AzureAdUserEmail"></inject>
+   Email/Username: <inject key="AzureAdUserEmail" enableCopy="true"></inject>
 
 2. Now enter the following password and click on Sign in.
-   Password: <inject key="AzureAdUserPassword"></inject>
+   Password: <inject key="AzureAdUserPassword" enableCopy="true"></inject>
 ```
 
 ### Insert environment outputs:
 
 Additionally, you can inject the values from ARM template outputs such as any azure resources name, VM username/password, etc. can be injected to lab guide.
-
-**>Syntax**: 
-```
-For template output parameters: 
-
-1. Please find your value 1 : <inject key="Display Name" style="color:red" />
-2. Please find your value 2 : <inject key="Display Name" style="color:LightCoral" />
-3. please find your value 3 : <inject key="Display Name" style="color:blue" />
-4. Please find your value 4: <inject key="Display Name" style="color:IndianRed" /> 
-5. Please find next value : <inject key="Tenant Domain Name" enableCopy="true" /> 
- 
-6. Testing the normal inject tags <inject key="LabVMDNSName"> with the variables <inject key="AzureAdUserEmail" /> 
- 
-Then, you need to Select ARCHOST-<inject key="AzureAdUserEmail" /> to connect with the local Hyper-V server   
-
-ARCHOST Test-<inject key="AzureAdUserEmail" /> to connect with the local Hyper-V server  
-
-enableCopy: Setting this parameter to true will provide a compy button next to the text.
- 
-<inject key="AzureAdUserEmail" enableCopy="true" />
- 
-<inject key="Tenant Domain Name" enableCopy="true" /> 
-```
 
 **>Example**: 
 
@@ -217,7 +219,7 @@ Below is the Outputs section of ARM template:
 
 3. In the Remote Desktop Connection program, provide the VM DNS name <inject key="VM DNS Name" enableCopy="true"/> and click Connect.
 
-4. In the following Enter Your Credential screen, provide VM username <inject key="VM Admin Username" enableCopy="true"/> and password <inject key="VM Admin Password" enableCopy="true"/> and select OK followed by Yes in the next page, which will then log you into the VM.
+4. In the following Enter Your Credential screen, provide VM username <inject key="VM Admin Username" enableCopy="true" style="color:blue" /> and password <inject key="VM Admin Password" enableCopy="true" style="color:blue" /> and select OK followed by Yes in the next page, which will then log you into the VM.
 
 ```
 
