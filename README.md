@@ -198,7 +198,7 @@ Below is the Outputs section of ARM template:
     },
     "VM Admin Username": {
       "type": "string",
-      "value": "[parameters('KaliUsername')]"
+      "value": "[parameters('VmUsername')]"
     },
     "VM Admin Password": {
       "type": "string",
